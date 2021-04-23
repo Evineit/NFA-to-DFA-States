@@ -1,4 +1,7 @@
 
+def get_all_states(initial_state, nfa_states):
+    pass
+
 def get_state(a_set, nfa_states, key):
     result = set()
     for value in a_set:
