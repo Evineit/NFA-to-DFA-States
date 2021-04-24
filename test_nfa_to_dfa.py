@@ -1,7 +1,7 @@
 from getDFAStates import get_state, get_all_states, solve
 
 locket_e = {0, 1, 5, 10}
-# states = [locket_e]
+keys = ["a","b","c","d","e"]
 
 nfa_states = {
     0: {
@@ -73,15 +73,20 @@ def test_get_e_states():
     assert get_state(locket_e, nfa_states, "e") == {13,14,10}
 
 def test_get_all_initial_states():
-    keys = ["a","b","c","d","e"]
-    assert len(get_all_states(locket_e, nfa_states, keys)) == 5
-  
+    result = get_all_states(locket_e, nfa_states, keys, "A")
+    assert len(result) == 5
+    assert result == [{1, 2, 4, 5, 6, 9},
+                      {1, 3, 4, 10, 12, 14},
+                      {5, 7, 9, 10, 11, 14},
+                      {8, 9, 5},
+                      {10, 13, 14}]
+
 def test_get_all_B_states():
-    print("\nB")
-    keys = ["a","b","c","d","e"]
-    assert len(get_all_states({2,4,1,6,9,5}, nfa_states, keys)) == 4
+    result = get_all_states({2,4,1,6,9,5}, nfa_states, keys,"B")
+    assert len(result) == 4
+    assert result == [{1, 2, 4, 5, 6, 9}, {1, 3, 4}, {9, 5, 7}, {8, 9, 5}]
+    
 
 def test_solve_from_locket_e():
     print()
-    keys = ["a","b","c","d","e"]
-    assert solve(locket_e, nfa_states)
+    assert solve(locket_e, nfa_states, keys)
