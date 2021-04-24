@@ -1,6 +1,10 @@
 
-def get_all_states(initial_state, nfa_states):
-    pass
+def get_all_states(initial_state, nfa_states, keys):
+    states = []
+    for key in keys:
+        if new_state := get_state(initial_state, nfa_states, key) not in states:
+            states.append(new_state)
+    return states
 
 def get_state(a_set, nfa_states, key):
     result = set()

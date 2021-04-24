@@ -73,4 +73,5 @@ def test_get_e_states():
     assert get_state(locket_e, nfa_states, "e") == {13,14,10}
 
 def test_get_all_states():
-    assert len(get_all_states(locket_e, nfa_states)) == 5
+    keys = ["a","b","c","d","e"]
+    assert len(get_all_states(locket_e, nfa_states, keys)) == 5
