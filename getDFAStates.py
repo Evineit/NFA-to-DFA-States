@@ -20,7 +20,8 @@ def solve(locket_e, nfa_states, keys):
     for state in states:
         if state not in solution.values():
             solution[chr(ord(list(solution.keys())[-1])+1)] = state
-    # pprint(solution)
+    pprint(solution)
+    print(f"size={len(solution)}")
     return solution
 
 
@@ -47,8 +48,9 @@ def get_all_states(initial_state, nfa_states, keys, context_state_key, context_s
 def get_state(a_set, nfa_states, key):
     result = set()
     for value in a_set:
-        if cur_set := nfa_states[value].get(key):
-            result.update(cur_set)
+        if value in nfa_states.keys():
+            if cur_set := nfa_states[value].get(key):
+                result.update(cur_set)
     while extra := get_transitions(result, nfa_states):
         result.update(extra)
     return result
@@ -57,14 +59,17 @@ def get_state(a_set, nfa_states, key):
 def get_transitions(a_set, nfa_states):
     extra = set()
     for value in a_set:
-        if cur_set := nfa_states[value].get("void"):
-            if cur_set not in a_set:
-                extra.update(cur_set)
+        if value in nfa_states.keys():
+            if cur_set := nfa_states[value].get("void"):
+                if cur_set not in a_set:
+                    extra.update(cur_set)
     if extra.issubset(a_set):
         return
     return extra
 
 if __name__ == "__main__":
-    with open("tosolve.yaml") as to_solve:
+    x = input("file name:\n")
+    print("-"*80)
+    with open(f"{x}.yaml") as to_solve:
         loaded_yaml = load(to_solve, Loader=FullLoader)
         solve(loaded_yaml['locket_e'], loaded_yaml["nfa_states"], loaded_yaml["keys"])
