@@ -22,6 +22,7 @@ def solve(locket_e, nfa_states, keys):
             solution[chr(ord(list(solution.keys())[-1])+1)] = state
     pprint(solution)
     print(f"size={len(solution)}")
+    # TODO: print number of final states and non final states in dfa
     return solution
 
 
@@ -33,6 +34,8 @@ def get_all_states(initial_state, nfa_states, keys, context_state_key, context_s
         new_state = get_state(initial_state, nfa_states, key)
         if new_state in context_states:
             to_print += f"{context_state_key}, {key} = {new_state} = {chr(ord('A')+context_states.index(new_state))}\n" if new_state else f"{context_state_key}, {key} = {{}}\n"
+        elif new_state in new_states:
+            to_print += f"{context_state_key}, {key} = {new_state} = {chr(ord('A')+len(context_states)+new_states.index(new_state))}\n" if new_state else f"{context_state_key}, {key} = {{}}\n"
         else:
             to_print += f"{context_state_key}, {key} = {new_state} = {chr(ord('A')+len(context_states)+len(new_states))} * \n" if new_state else f"{context_state_key}, {key} = {{}}\n"
         if new_state and new_state not in states:
