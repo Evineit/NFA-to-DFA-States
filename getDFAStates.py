@@ -1,6 +1,8 @@
 from pprint import pprint
+from yaml import load, FullLoader
 
 def solve(locket_e, nfa_states, keys):
+    print(f"Cerradura Ɛ:  {locket_e} = A *\n")
     solution = {
         'A': locket_e
     }
@@ -18,7 +20,7 @@ def solve(locket_e, nfa_states, keys):
     for state in states:
         if state not in solution.values():
             solution[chr(ord(list(solution.keys())[-1])+1)] = state
-    pprint(solution)
+    # pprint(solution)
     return solution
 
 
@@ -37,8 +39,8 @@ def get_all_states(initial_state, nfa_states, keys, context_state_key, context_s
             if new_state not in context_states:
                 new_states.append(new_state)
     print(to_print)
-    print("\n")
-    pprint(states)
+    # print("\n")
+    # pprint(states)
     return states
 
 
@@ -63,4 +65,6 @@ def get_transitions(a_set, nfa_states):
     return extra
 
 if __name__ == "__main__":
-    pass
+    with open("tosolve.yaml") as to_solve:
+        loaded_yaml = load(to_solve, Loader=FullLoader)
+        solve(loaded_yaml['locket_e'], loaded_yaml["nfa_states"], loaded_yaml["keys"])

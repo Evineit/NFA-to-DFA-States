@@ -1,0 +1,41 @@
+"locket_e": !!set {0, 1, 5, 10}
+"keys": ["a","b","c","d","e"]
+"nfa_states":
+    0:
+        "void": !!set {1, 5, 10}
+    1:
+        "a": !!set {2}
+        "b": !!set {3}
+    2:
+        "void": !!set {4}
+    
+    3:
+        "void": !!set {4}
+    4:
+        "void": !!set {1}
+    
+    5:
+        "a": !!set {6}
+        "c": !!set {7}
+        "d": !!set {8}
+    6:
+        "void": !!set {9}
+    7:
+        "void": !!set {9}
+    8:
+        "void": !!set {9}
+    9:
+        "void": !!set {5}
+    10:
+        "b": !!set {12}
+        "c": !!set {11}
+        "e": !!set {13}
+    11:
+        "void": !!set {14}
+    12:
+        "void": !!set {14}
+    13:
+        "void": !!set {14}
+    14:
+        "void": !!set {10}
+    
